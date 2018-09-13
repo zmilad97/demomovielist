@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.getJSON("movies", function(result){
+                $.each(result, function(i, field){
+                    $("table").append("<br>"+"ID = "+  field.id+"    ;    Name = "+field.name+"<br>"+"<br>");
+                });
+            });
+        });
+    </script>
+    <script type="application/javascript">
+        function del() {
+            var movie ={};
+            movie.id = $("#dd").val();
+            movie.url="/movies/"+movie.id;
+            $.ajax({
+                url: movie.url,
+                type: 'DELETE',
+                contentType: 'application/json',
+
+                success : function() {
+                    alert("The movie has been deleted !");
+                    location.reload();
+                },
+                error : function () {
+                    alert("Error ! : the movie is not on the list !")
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+<div>
+    <fieldset>
+        <legend style="font-family: Hack">Delete Movie</legend>
+        Enter the Movie ID for delete : <br><br>
+        <input type="text" id="dd" >&nbsp;&nbsp;
+        <button onclick="del();">Delete</button>&nbsp;&nbsp;
+        <button onclick="location.href='index.html'">Back</button><br>
+        <br><br>
+    <table border="5" style="font-family: Hack ;border-color: aquamarine" >
+    </table>
+    </fieldset>
+</div>
+
+</body>
+</html>

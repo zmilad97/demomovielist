@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="application/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <title>Add Movie</title>
+</head>
+<body>
+<div style="font-family: Hack ; align-self: center " >
+    <fieldset>
+        <legend style="align-items: center;">Add Movie</legend>
+
+
+    Movie name :
+    <br>
+    <input id="name"><br>
+    Director name :
+    <br>
+    <input id="directorName"><br>
+    Genre :
+    <br>
+    <input id="genre"><br>
+    Release year :
+    <br>
+    <input id="releaseDate" type="number"><br>
+    <br>
+    status :
+    <select id="status">
+        <option value="seen list">seen list</option>
+        <option value="watch list">watch list</option>
+    </select>
+    <br>
+    <br>
+    <button onclick="add()">Submit</button>
+    <button onclick="location.href='index.html'">Back to Menu</button>&nbsp;&nbsp;
+    </fieldset>
+
+</div>
+</body>
+<script type="application/javascript">
+    function add() {
+        var movie ={};
+        movie.name = $("#name").val();
+        movie.genre = $("#genre").val();
+        movie.directorName = $("#directorName").val();
+        movie.releaseDate = $("#releaseDate").val();
+        movie.status =  $("#status").val();
+
+        $.ajax({
+            url: '/movies',
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(movie),
+            success : function() {
+                alert('Add was performed.');
+            }
+        });
+    }
+</script>
+</html>
